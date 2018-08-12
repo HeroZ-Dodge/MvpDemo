@@ -3,8 +3,7 @@ package com.dodge.hero.z.mvpdemo;
 import android.app.Activity;
 import android.app.Application;
 
-import com.dodge.hero.z.mvpdemo.di.app.AppModule;
-import com.dodge.hero.z.mvpdemo.di.app.DaggerAppComponent;
+import com.dodge.hero.z.mvpdemo.di.DI;
 
 import javax.inject.Inject;
 
@@ -26,10 +25,8 @@ public class MyApplication extends Application implements HasActivityInjector {
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
-                .build()
-                .inject(this);
+        DI.init(this);
+        DI.appComponent().inject(this);
     }
 
     @Override
